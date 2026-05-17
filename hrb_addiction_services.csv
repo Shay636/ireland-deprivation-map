@@ -1,0 +1,87 @@
+name,lat,lng,type,county,address,source
+Quest Brain Injusry Services,53.2871814,-9.0334699,rehabilitation,,Tuam Road,OpenStreetMap
+National Eating Disorders Recovery Centre,53.3274803,-6.2248788,rehabilitation,,Merrion Road,OpenStreetMap
+Regent House,52.6510957,-7.2546782,rehabilitation,,,OpenStreetMap
+Rehab Care,53.999719,-7.3551959,rehabilitation,,,OpenStreetMap
+The Glen and District Neighbourhood Youth Project,51.9114542,-8.4634577,outreach,,Carnloch Court,OpenStreetMap
+Motivation Weight Mangement,52.2642852,-9.6787606,rehabilitation,,,OpenStreetMap
+Roddens,55.0710564,-6.5104776,rehabilitation,,,OpenStreetMap
+Drug Treatment Centre Board (Trinity Court),53.3428,-6.2517,outpatient/residential,Dublin,"30-31 Pearse St, Dublin 2",curated_public_records
+Merchants Quay Ireland Drop-In Centre,53.3429,-6.2759,harm_reduction,Dublin,"Merchants Quay, Dublin 8",curated_public_records
+Coolmine Therapeutic Community,53.3877,-6.3556,residential,Dublin,"Blanchardstown, Dublin 15",curated_public_records
+Ana Liffey Drug Project,53.3478,-6.2604,outpatient,Dublin,"48 Middle Abbey St, Dublin 1",curated_public_records
+Stanhope Street Treatment Centre,53.3534,-6.2826,outpatient,Dublin,"Stanhope St, Dublin 7",curated_public_records
+Rutland Centre,53.2955,-6.3066,residential,Dublin,"Knocklyon, Dublin 16",curated_public_records
+Keltoi Residential Treatment Centre,53.3541,-6.2838,residential,Dublin,"Grangegorman, Dublin 7",curated_public_records
+Saol Project,53.3475,-6.2588,outpatient,Dublin,"5-6 Amiens St, Dublin 1",curated_public_records
+Rialto Community Drug Team,53.3368,-6.2908,community,Dublin,"Rialto, Dublin 8",curated_public_records
+Ballymun Community Addiction Team,53.4136,-6.2626,community,Dublin,"Ballymun, Dublin 11",curated_public_records
+Cherry Orchard Hospital Addiction Services,53.3486,-6.3725,outpatient,Dublin,"Cherry Orchard, Dublin 10",curated_public_records
+Cluain Mhuire Addiction Services,53.2929,-6.1751,outpatient,Dublin,"Newtownpark Ave, Blackrock",curated_public_records
+Finglas Community Drug Team,53.3905,-6.2952,community,Dublin,"Finglas, Dublin 11",curated_public_records
+Cabra Community Drug Team,53.367,-6.2975,community,Dublin,"Cabra, Dublin 7",curated_public_records
+Tallaght Drug and Alcohol Service,53.2875,-6.3743,community,Dublin,"Tallaght, Dublin 24",curated_public_records
+Clondalkin Community Drug Team,53.322,-6.3952,community,Dublin,"Clondalkin, Dublin 22",curated_public_records
+Dún Laoghaire Drug and Alcohol Service,53.2955,-6.1359,community,Dublin,Dún Laoghaire,curated_public_records
+Bray Community Drug Team,53.2024,-6.0993,community,Wicklow,"Bray, Co. Wicklow",curated_public_records
+HSE Addiction Services Beaumont,53.3929,-6.238,outpatient,Dublin,"Beaumont Hospital, Dublin 9",curated_public_records
+North Dublin Community Drug Team,53.4086,-6.2427,community,Dublin,"Northside, Dublin",curated_public_records
+Father Peter McVerry Trust - Prospect Hill,53.3721,-6.2599,residential,Dublin,"Prospect Hill, Dublin 9",curated_public_records
+Crosscare Drug and Alcohol Services,53.3677,-6.2587,community,Dublin,"Drumcondra, Dublin 9",curated_public_records
+South Inner City Community Drug Team,53.3362,-6.2673,community,Dublin,"The Liberties, Dublin 8",curated_public_records
+Inchicore Community Drug Team,53.3413,-6.3153,community,Dublin,"Inchicore, Dublin 8",curated_public_records
+HSE Addiction Service Blanchardstown,53.3883,-6.3765,outpatient,Dublin,"Blanchardstown, Dublin 15",curated_public_records
+Tabor Lodge Addiction Treatment Centre,51.7338,-8.3816,residential,Cork,"Belgooly, Co. Cork",curated_public_records
+Arbour House,51.9105,-8.4653,residential,Cork,"Farranree, Cork",curated_public_records
+St Michael's Unit Cork,51.8912,-8.4677,inpatient,Cork,"St Finbarr's Hospital, Cork",curated_public_records
+Cork Community Drug and Alcohol Service,51.8977,-8.4741,community,Cork,Cork City,curated_public_records
+Knocknaheeny/Hollyhill Drug Team,51.9132,-8.4985,community,Cork,"Knocknaheeny, Cork",curated_public_records
+Midleton Addiction Service,51.9121,-8.1716,outpatient,Cork,"Midleton, Co. Cork",curated_public_records
+Bantry Addiction Service,51.6813,-9.4533,outpatient,Cork,"Bantry, Co. Cork",curated_public_records
+Novas Initiatives,52.6558,-8.6268,residential,Limerick,Limerick City,curated_public_records
+Limerick Addiction Services (HSE),52.6572,-8.6263,outpatient,Limerick,Limerick City,curated_public_records
+Cuan Mhuire Bruree,52.4582,-8.672,residential,Limerick,"Bruree, Co. Limerick",curated_public_records
+Milford Care Centre Addiction Services,52.6724,-8.5917,outpatient,Limerick,"Castletroy, Limerick",curated_public_records
+Bushypark Treatment Centre,53.2744,-9.0596,residential,Galway,"Ennis Rd, Galway",curated_public_records
+Galway City Community Addiction Service,53.2743,-9.0547,community,Galway,Galway City,curated_public_records
+Cuan Mhuire Coolarne,53.5215,-8.8463,residential,Galway,"Coolarne, Tuam, Co. Galway",curated_public_records
+Western Region Drug Task Force Services,53.2721,-9.0615,community,Galway,Galway,curated_public_records
+Aiséirí Treatment Centre Cahir,52.3748,-7.9219,residential,Tipperary,"Cahir, Co. Tipperary",curated_public_records
+Aiséirí Wexford,52.3407,-6.4659,residential,Wexford,Wexford Town,curated_public_records
+Nenagh Addiction Service,52.8613,-8.1972,outpatient,Tipperary,"Nenagh, Co. Tipperary",curated_public_records
+Clonmel Addiction Service,52.3547,-7.7045,outpatient,Tipperary,"Clonmel, Co. Tipperary",curated_public_records
+Talbot Grove Treatment Centre,52.2299,-9.4549,residential,Kerry,"Castleisland, Co. Kerry",curated_public_records
+Kerry Addiction Service Tralee,52.2674,-9.7034,outpatient,Kerry,"Tralee, Co. Kerry",curated_public_records
+Kerry Addiction Service Killarney,52.0562,-9.5044,outpatient,Kerry,"Killarney, Co. Kerry",curated_public_records
+Cuan Mhuire Waterford,52.2521,-7.1076,residential,Waterford,Waterford City,curated_public_records
+Waterford Community Addiction Team,52.256,-7.1102,community,Waterford,Waterford City,curated_public_records
+Dungarvan Addiction Service,52.0888,-7.6236,outpatient,Waterford,"Dungarvan, Co. Waterford",curated_public_records
+Teen Challenge Ireland,52.6527,-7.2424,residential,Kilkenny,Kilkenny,curated_public_records
+Kilkenny Community Addiction Service,52.6503,-7.2506,community,Kilkenny,Kilkenny City,curated_public_records
+Wexford Community Drug and Alcohol Team,52.3368,-6.4631,community,Wexford,Wexford Town,curated_public_records
+Tiglin Challenge Centre,52.9871,-6.0889,residential,Wicklow,"Ashford, Co. Wicklow",curated_public_records
+Wicklow Community Drug and Alcohol Team,52.9805,-6.0444,community,Wicklow,Wicklow Town,curated_public_records
+Cuan Mhuire Athy,52.992,-6.9842,residential,Kildare,"Athy, Co. Kildare",curated_public_records
+Kildare Community Addiction Service,53.1571,-6.9126,community,Kildare,"Naas, Co. Kildare",curated_public_records
+Leixlip Drug and Alcohol Service,53.3637,-6.495,community,Kildare,"Leixlip, Co. Kildare",curated_public_records
+Meath Community Drug and Alcohol Service,53.6541,-6.6863,community,Meath,"Navan, Co. Meath",curated_public_records
+Drogheda Addiction Service,53.7197,-6.3567,community,Louth,"Drogheda, Co. Louth",curated_public_records
+Dundalk Community Addiction Team,54.0016,-6.4033,community,Louth,"Dundalk, Co. Louth",curated_public_records
+Clare Addiction Service Ennis,52.8449,-8.9862,outpatient,Clare,"Ennis, Co. Clare",curated_public_records
+Mayo Community Addiction Service Castlebar,53.8572,-9.2965,community,Mayo,"Castlebar, Co. Mayo",curated_public_records
+Ballina Drug and Alcohol Service,54.1143,-9.1591,community,Mayo,"Ballina, Co. Mayo",curated_public_records
+Donegal Addiction Services Letterkenny,54.9458,-7.7361,outpatient,Donegal,"Letterkenny, Co. Donegal",curated_public_records
+Donegal Addiction Services Ballyshannon,54.5005,-8.1875,outpatient,Donegal,"Ballyshannon, Co. Donegal",curated_public_records
+Sligo Community Drug and Alcohol Team,54.2766,-8.4762,community,Sligo,Sligo Town,curated_public_records
+Roscommon Addiction Services,53.6289,-8.1819,outpatient,Roscommon,Roscommon Town,curated_public_records
+Longford Community Drug and Alcohol Team,53.7265,-7.7939,community,Longford,Longford Town,curated_public_records
+Athlone Addiction Service,53.4239,-7.9407,community,Westmeath,"Athlone, Co. Westmeath",curated_public_records
+Mullingar Addiction Service,53.5228,-7.3466,community,Westmeath,"Mullingar, Co. Westmeath",curated_public_records
+Offaly Community Addiction Service,53.2743,-7.4918,community,Offaly,"Tullamore, Co. Offaly",curated_public_records
+Laois Community Addiction Service,53.0344,-7.2988,community,Laois,"Portlaoise, Co. Laois",curated_public_records
+Carlow Community Drug and Alcohol Team,52.834,-6.9337,community,Carlow,Carlow Town,curated_public_records
+Monaghan Addiction Services,54.2513,-6.968,outpatient,Monaghan,Monaghan Town,curated_public_records
+Cavan Addiction Services,53.9897,-7.3633,outpatient,Cavan,Cavan Town,curated_public_records
+Leitrim Drug and Alcohol Service,53.9453,-8.0831,community,Leitrim,Carrick-on-Shannon,curated_public_records
+Midwest Simon Community Addiction Services,52.6649,-8.6294,harm_reduction,Limerick,Limerick City,curated_public_records
+Depaul Ireland Dublin,53.3463,-6.2591,harm_reduction,Dublin,Dublin 1,curated_public_records

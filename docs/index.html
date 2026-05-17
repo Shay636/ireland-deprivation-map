@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Decades of Disadvantage: Addiction Treatment Access and Deprivation in Ireland</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text:   #1a1a1a;
+    --muted:  #555;
+    --border: #ddd;
+    --accent: #c00;
+    --bg:     #ffffff;
+    --max:    80%;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 52px 0 32px;
+    border-bottom: 2px solid var(--text);
+  }
+
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  header h1 {
+    font-size: clamp(1.7rem, 3.6vw, 2.2rem);
+    font-weight: normal;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    font-style: italic;
+    color: var(--accent);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.3;
+    margin-bottom: 24px;
+  }
+
+  .intro {
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+
+  /* ── Map section ── */
+  .map-section {
+    background: #efefef;
+  }
+
+  .map-label {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 9px 24px 0;
+  }
+
+  .map-frame {
+    width: 100%;
+    height: min(80vh, 680px);
+    border: none;
+    display: block;
+  }
+
+  /* ── Body sections ── */
+  .body-section {
+    padding: 44px 0 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .body-section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .body-section p {
+    margin-bottom: 0.95em;
+    font-size: 0.975rem;
+  }
+
+  .body-section p:last-child { margin-bottom: 0; }
+
+  /* ── Pull stat ── */
+  .stat-pull {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    margin: 24px 0 28px;
+  }
+
+  .stat-pull .number {
+    display: block;
+    font-size: 1.9rem;
+    font-weight: bold;
+    line-height: 1.1;
+    color: var(--accent);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-pull .label {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 3px;
+    max-width: 380px;
+    line-height: 1.45;
+  }
+
+  /* ── Limitations list ── */
+  .limitations-list {
+    list-style: none;
+  }
+
+  .limitations-list li {
+    padding: 10px 0 10px 16px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .limitations-list li:first-child { border-top: 1px solid var(--border); }
+
+  .limitations-list li::before {
+    content: "/";
+    position: absolute;
+    left: 0;
+    color: #bbb;
+    font-style: normal;
+  }
+
+  .limitations-list li strong { color: var(--text); font-weight: 600; }
+
+  /* ── Sources list ── */
+  .sources-list {
+    list-style: none;
+  }
+
+  .sources-list li {
+    font-size: 0.85rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--muted);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.55;
+  }
+
+  .sources-list li:first-child { border-top: 1px solid var(--border); }
+
+  .sources-list .source-title { color: var(--text); font-weight: 600; }
+
+  .sources-list a {
+    color: var(--muted);
+    text-underline-offset: 2px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 24px 0 48px;
+    border-top: 2px solid var(--text);
+  }
+
+  footer p {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  footer a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 560px) {
+    html { font-size: 15px; }
+    header { padding: 32px 0 24px; }
+    .map-frame { height: 58vh; }
+    .stat-pull .number { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <p class="eyebrow">Ireland, 2006 to 2022</p>
+    <h1>Two Decades of Disadvantage</h1>
+    <p class="subtitle">Addiction Treatment Access and Deprivation in Ireland</p>
+    <p class="intro">
+      <strong>728,000 people in Ireland have lived in persistently deprived areas for
+      at least twenty years.</strong> These are places that fell into the bottom quartile of
+      the national deprivation index in 2006 and have never left it. Many of the same
+      areas are also the furthest from addiction treatment services. This map traces that
+      overlap across four census waves: use the time slider to watch how deprivation has
+      shifted, held, or deepened since the Celtic Tiger era. Proximity to a service is
+      not the same as access, but it is where access starts.
+    </p>
+  </header>
+</div>
+
+<div class="map-section">
+  <p class="map-label">Interactive map: use the slider or Play button to move through time</p>
+  <iframe
+    class="map-frame"
+    src="timeslider.html"
+    title="Deprivation and addiction treatment access in Ireland, 2006 to 2022"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<div class="container">
+
+  <section class="body-section">
+    <p class="section-label">Key findings</p>
+
+    <div class="stat-pull">
+      <span class="number">728,000</span>
+      <span class="label">people living in areas that were deprived in every census wave from 2006 to 2022</span>
+    </div>
+
+    <p>
+      Across the country, 434 Electoral Divisions have sat in the most deprived quartile at
+      every census since 2006. These are not temporary pockets of hardship. They are places
+      the recovery of the Celtic Tiger era, and the post-crash stabilisation that followed,
+      largely passed by.
+    </p>
+    <p>
+      Donegal stands out most starkly in rural Ireland: 79 persistently deprived Electoral
+      Divisions, representing around 85,000 people, spread across a county where some
+      communities are more than 70 kilometres from the nearest listed addiction treatment
+      service. Distance here compounds every other disadvantage.
+    </p>
+    <p>
+      Dublin City contains the largest population in persistently deprived areas: roughly
+      113,000 people across 38 Electoral Divisions, concentrated in the north and south
+      inner city. Yet Dublin City records zero underserved areas on the access metric,
+      because services are densely distributed across the capital. That apparent
+      contradiction reflects a real tension. Services exist, but so do waiting lists,
+      referral barriers, and the everyday difficulty of reaching help when your life is in
+      crisis. The same pattern applies to Cork City, Limerick City, and Waterford City.
+      Where they exist, urban services cover the ground. They do not always cover the need.
+    </p>
+  </section>
+
+  <section class="body-section">
+    <p class="section-label">Limitations</p>
+    <ul class="limitations-list">
+      <li>
+        <strong>Service locations reflect December 2025 only.</strong>
+        No systematic historical record of service locations across the four census years
+        was available. Services have opened, moved, and closed; the 2025 data is used as a
+        fixed reference layer and should not be read as a measure of access at any earlier point.
+      </li>
+      <li>
+        <strong>GP-based treatment is excluded.</strong>
+        Medication-assisted treatment (methadone, buprenorphine) prescribed through
+        general practitioners is not represented in the service locations shown. In areas
+        with active GP prescribers this may substantially understate real access,
+        particularly in rural settings where community pharmacies hold dispensing contracts.
+      </li>
+      <li>
+        <strong>Distance is a proxy, not a measure of access.</strong>
+        The analysis uses straight-line distance to the nearest listed service. It does not
+        account for public transport availability, waiting times, service capacity, operating
+        hours, or any of the social and structural barriers that determine whether someone
+        can actually engage with treatment.
+      </li>
+      <li>
+        <strong>The 2022 deprivation scores use the official Pobal HP Index at Electoral
+        Division level.</strong> A companion small-area analysis derives scores from
+        CSO SAPS 2022 microdata at finer geographic resolution. Both use the same underlying
+        census data; the Pobal index is used here to keep the methodology consistent across
+        all four historical waves.
+      </li>
+      <li>
+        <strong>3.2% of historical Electoral Divisions are unmatched.</strong>
+        Electoral Division boundaries changed between the 2006 and 2022 censuses. Divisions
+        that were merged, split, or renamed cannot be reliably linked and appear grey in the
+        2006, 2011, and 2016 layers. The 2022 layer is fully matched.
+      </li>
+    </ul>
+  </section>
+
+  <section class="body-section">
+    <p class="section-label">Sources</p>
+    <ul class="sources-list">
+      <li>
+        <span class="source-title">Pobal HP Deprivation Index, 2006, 2011, 2016, 2022.</span>
+        Pobal. Electoral Division level. Relative weight score; more negative = more deprived.
+        <a href="https://www.pobal.ie/pobal-hp-deprivation-index/" target="_blank" rel="noopener">pobal.ie</a>
+      </li>
+      <li>
+        <span class="source-title">CSO Small Area Population Statistics (SAPS) 2022.</span>
+        Central Statistics Office. Used to construct the Small Area deprivation composite
+        in the companion analysis.
+        <a href="https://www.cso.ie/en/census/census2022/census2022smallareapopulationstatistics/" target="_blank" rel="noopener">cso.ie</a>
+      </li>
+      <li>
+        <span class="source-title">CSO Electoral Division Boundaries 2022 (Generalised 20m).</span>
+        Ordnance Survey Ireland / Central Statistics Office, via data.gov.ie.
+        <a href="https://data.gov.ie/dataset/cso-electoral-divisions-national-statistical-boundaries-2022-generalised-20m1" target="_blank" rel="noopener">data.gov.ie</a>
+      </li>
+      <li>
+        <span class="source-title">Addiction Treatment Service Locations, December 2025.</span>
+        Compiled from OpenStreetMap and publicly documented Irish addiction treatment services
+        (HRB NDTRS agencies, HSE services, voluntary sector providers). GP-based treatment
+        not included. Full list available in the code repository.
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>
+      Analysis by Shay McDonnell.&ensp;&middot;&ensp;Built using open Irish government data.&ensp;&middot;&ensp;Code on
+      <a href="https://github.com/Shay636/ireland-deprivation-map" target="_blank" rel="noopener">GitHub</a>.
+    </p>
+    <p style="margin-top:4px;">
+      Map tiles &copy;&thinsp;<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>,
+      &copy;&thinsp;<a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>
