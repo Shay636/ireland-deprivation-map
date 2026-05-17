@@ -405,6 +405,67 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   /* ── Tooltip override ── */
   .leaflet-tooltip { font-size: 12px; }
+
+  /* ── Legend toggle (mobile only) ── */
+  #legend-toggle {
+    display: none;
+    position: absolute; top: 8px; right: 8px;
+    background: none; border: none; cursor: pointer;
+    font-size: 14px; color: #888; padding: 4px 6px;
+    line-height: 1;
+  }
+  #legend.collapsed > *:not(#legend-toggle) { display: none !important; }
+  #legend.collapsed { padding: 8px 36px 8px 12px; min-width: 0; }
+
+  /* ══════════════════════════════════════════════════════════
+     MOBILE  (≤ 600px)
+  ══════════════════════════════════════════════════════════ */
+  @media (max-width: 600px) {
+    /* Time control: full-width, sits at bottom */
+    #time-control {
+      width: calc(100vw - 24px);
+      left: 12px;
+      transform: none;
+      bottom: 12px;
+      padding: 12px 14px 10px;
+    }
+
+    /* Larger year number */
+    #year-display { font-size: 28px; margin-bottom: 10px; }
+
+    /* Fatter slider track + bigger thumb for touch (44px hit-area) */
+    #year-slider { height: 6px; }
+    #year-slider::-webkit-slider-thumb {
+      width: 28px; height: 28px;
+    }
+    #year-slider::-moz-range-thumb {
+      width: 28px; height: 28px;
+    }
+
+    /* 44 px minimum touch targets on buttons */
+    #play-btn  { min-height: 48px; font-size: 15px; }
+    #reset-btn { min-height: 48px; padding: 0 16px; font-size: 13px; }
+    .vtab      { min-height: 44px; font-size: 11px; }
+
+    /* Legend: compact, top-right, scrollable, collapsible */
+    #legend {
+      bottom: auto;
+      top: 50px;          /* below Leaflet zoom controls */
+      right: 8px;
+      font-size: 11px;
+      min-width: 0;
+      max-height: calc(100vh - 220px);
+      overflow-y: auto;
+      padding: 8px 10px;
+    }
+    #legend-toggle { display: block; }
+    .swatch, .persistent-swatch { width: 11px; height: 11px; }
+    .legend-row { font-size: 10.5px; margin: 2px 0; }
+    #legend .caveat { font-size: 9px; }
+
+    /* Tooltip: larger text for readability */
+    .leaflet-tooltip { font-size: 13px; max-width: 240px; }
+  }
 </style>
 </head>
 <body>
@@ -433,6 +494,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
 <!-- Legend -->
 <div class="panel" id="legend">
+  <button id="legend-toggle" onclick="toggleLegendCollapse()" title="Toggle legend">&#10005;</button>
   <div id="view-tabs">
     <button class="vtab active" id="tab-dep"  onclick="setView('dep')">Deprivation</button>
     <button class="vtab"        id="tab-dist" onclick="setView('dist')">Distance to service</button>
@@ -585,6 +647,13 @@ function tooltipContent(feature) {
           ${flag}`;
 }
 
+function toggleLegendCollapse() {
+  const leg = document.getElementById('legend');
+  const btn = document.getElementById('legend-toggle');
+  leg.classList.toggle('collapsed');
+  btn.innerHTML = leg.classList.contains('collapsed') ? '&#9776;' : '&#10005;';
+}
+
 function setView(mode) {
   viewMode = mode;
   document.getElementById('tab-dep').classList.toggle('active',  mode === 'dep');
@@ -602,9 +671,15 @@ const geojsonLayer = L.geoJSON(GEOJSON, {
   style: styleFeature,
   onEachFeature: function(feature, layer) {
     layer.bindTooltip('', {sticky: true, opacity: 0.95, maxWidth: 280});
+    // mouseover for desktop; click for touch devices
     layer.on('mouseover', function() {
       layer.setTooltipContent(tooltipContent(feature));
       layer.openTooltip();
+    });
+    layer.on('click', function(e) {
+      layer.setTooltipContent(tooltipContent(feature));
+      layer.openTooltip();
+      L.DomEvent.stopPropagation(e);
     });
   }
 }).addTo(map);

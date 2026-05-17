@@ -46,6 +46,34 @@
   footer p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
               font-size: 0.75rem; color: var(--muted); }
   footer a { color: var(--text); text-underline-offset: 2px; }
+
+  /* Table scroll wrapper */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* ── Mobile ── */
+  @media (max-width: 600px) {
+    html { font-size: 15px; }
+    :root { --max: 100%; }
+    .container { padding: 0 16px; }
+    header { padding: 28px 0 20px; }
+    .section { padding: 28px 0 24px; }
+
+    /* Stat boxes stack to two per row */
+    .stat-row { gap: 12px; }
+    .stat-box { min-width: calc(50% - 6px); padding: 10px 14px; }
+    .stat-box .val { font-size: 1.25rem; }
+
+    /* Scatter plots: full width, let browser scale them */
+    .plot-wrap { border-radius: 0; margin: 16px -16px; border-left: none; border-right: none; }
+    .plot-wrap img { width: 100%; height: auto; }
+
+    /* Audit table: scrollable */
+    .table-scroll table { min-width: 520px; }
+
+    /* Summary text */
+    .summary p { font-size: 0.92rem; }
+    .method { font-size: 0.8rem; }
+  }
 </style>
 </head>
 <body>
@@ -150,6 +178,7 @@ The most deprived rural areas are, on average, the furthest from help.</p>
     treatment services from any public directory. The table below documents each
     exclusion and the reason.
   </p>
+  <div class="table-scroll">
   <table style="width:100%;border-collapse:collapse;font-size:0.82rem;
                 font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
     <thead>
@@ -205,6 +234,7 @@ The most deprived rural areas are, on average, the furthest from help.</p>
       </tr>
     </tbody>
   </table>
+  </div>
   <p class="method" style="margin-top:12px;">
     The correlation figures above use 79 verified addiction treatment services. Facilities
     were excluded where their primary mandate is demonstrably unrelated to substance use
