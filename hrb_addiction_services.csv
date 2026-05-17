@@ -1,11 +1,4 @@
 name,lat,lng,type,county,address,source
-Quest Brain Injusry Services,53.2871814,-9.0334699,rehabilitation,,Tuam Road,OpenStreetMap
-National Eating Disorders Recovery Centre,53.3274803,-6.2248788,rehabilitation,,Merrion Road,OpenStreetMap
-Regent House,52.6510957,-7.2546782,rehabilitation,,,OpenStreetMap
-Rehab Care,53.999719,-7.3551959,rehabilitation,,,OpenStreetMap
-The Glen and District Neighbourhood Youth Project,51.9114542,-8.4634577,outreach,,Carnloch Court,OpenStreetMap
-Motivation Weight Mangement,52.2642852,-9.6787606,rehabilitation,,,OpenStreetMap
-Roddens,55.0710564,-6.5104776,rehabilitation,,,OpenStreetMap
 Drug Treatment Centre Board (Trinity Court),53.3428,-6.2517,outpatient/residential,Dublin,"30-31 Pearse St, Dublin 2",curated_public_records
 Merchants Quay Ireland Drop-In Centre,53.3429,-6.2759,harm_reduction,Dublin,"Merchants Quay, Dublin 8",curated_public_records
 Coolmine Therapeutic Community,53.3877,-6.3556,residential,Dublin,"Blanchardstown, Dublin 15",curated_public_records

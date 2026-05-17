@@ -270,20 +270,9 @@ def run():
         print(f"Found existing {OUTPUT_FILE} – skipping scrape.")
         return True
 
-    services = []
-
-    # 1. Try OpenStreetMap
-    services = try_osm_overpass()
-
-    # 2. Fall back to curated list if OSM returned too few
-    if len(services) < 20:
-        print(f"OSM data insufficient ({len(services)} records). Merging with curated list.")
-        osm_names = {s["name"].lower() for s in services}
-        curated = curated_fallback()
-        # Add curated entries not already found in OSM
-        for svc in curated:
-            if svc["name"].lower() not in osm_names:
-                services.append(svc)
+    # Use curated list as the primary source — OSM tagging for Irish addiction
+    # services is too sparse and noisy to be reliable.
+    services = curated_fallback()
 
     if not services:
         print("\n[ERROR] Could not retrieve any service data.")
