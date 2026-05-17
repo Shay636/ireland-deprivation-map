@@ -147,6 +147,78 @@ a rural Electoral Division is on average 0.47 km further from the nearest servic
   </p>
 </section>
 
+<section class="section">
+  <p class="section-label">Service data audit: 79 vs 86</p>
+  <p class="method" style="margin-bottom:12px;">
+    An earlier run of the pipeline included 86 service markers after merging 79 curated
+    services with 7 results from an OpenStreetMap Overpass query. The OSM query was
+    subsequently removed because all 7 results were found to be irrelevant. Each was
+    investigated and classified below. No geocoding was needed: all 7 had valid coordinates
+    but were the wrong type of service.
+  </p>
+  <table style="width:100%;border-collapse:collapse;font-size:0.82rem;
+                font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+    <thead>
+      <tr style="border-bottom:2px solid #1a1a1a;">
+        <th style="text-align:left;padding:6px 10px 6px 0;">Service</th>
+        <th style="text-align:left;padding:6px 10px;">Location</th>
+        <th style="text-align:left;padding:6px 10px;">Decision</th>
+        <th style="text-align:left;padding:6px 0;">Reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:7px 10px 7px 0;color:#555;">Quest Brain Injury Services</td>
+        <td style="padding:7px 10px;color:#555;">Co. Galway</td>
+        <td style="padding:7px 10px;color:#c00;font-weight:600;">Excluded</td>
+        <td style="padding:7px 0;color:#555;">Brain injury rehabilitation, not addiction treatment</td>
+      </tr>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:7px 10px 7px 0;color:#555;">National Eating Disorders Recovery Centre</td>
+        <td style="padding:7px 10px;color:#555;">Co. Dublin</td>
+        <td style="padding:7px 10px;color:#c00;font-weight:600;">Excluded</td>
+        <td style="padding:7px 0;color:#555;">Eating disorder service, not addiction treatment</td>
+      </tr>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:7px 10px 7px 0;color:#555;">Regent House</td>
+        <td style="padding:7px 10px;color:#555;">Co. Kilkenny</td>
+        <td style="padding:7px 10px;color:#c00;font-weight:600;">Excluded</td>
+        <td style="padding:7px 0;color:#555;">No evidence of addiction treatment mandate in any public directory</td>
+      </tr>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:7px 10px 7px 0;color:#555;">Rehab Care</td>
+        <td style="padding:7px 10px;color:#555;">Co. Cavan</td>
+        <td style="padding:7px 10px;color:#c00;font-weight:600;">Excluded</td>
+        <td style="padding:7px 0;color:#555;">Disability services NGO (RehabCare), not addiction treatment</td>
+      </tr>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:7px 10px 7px 0;color:#555;">The Glen &amp; District Neighbourhood Youth Project</td>
+        <td style="padding:7px 10px;color:#555;">Co. Cork</td>
+        <td style="padding:7px 10px;color:#c00;font-weight:600;">Excluded</td>
+        <td style="padding:7px 0;color:#555;">Community youth project, not a treatment service</td>
+      </tr>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:7px 10px 7px 0;color:#555;">Motivation Weight Management</td>
+        <td style="padding:7px 10px;color:#555;">Co. Kerry</td>
+        <td style="padding:7px 10px;color:#c00;font-weight:600;">Excluded</td>
+        <td style="padding:7px 0;color:#555;">Weight management clinic, unrelated to addiction</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 10px 7px 0;color:#555;">Roddens</td>
+        <td style="padding:7px 10px;color:#555;">Co. Antrim, NI</td>
+        <td style="padding:7px 10px;color:#c00;font-weight:600;">Excluded</td>
+        <td style="padding:7px 0;color:#555;">Outside the Republic of Ireland (Northern Ireland)</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="method" style="margin-top:12px;">
+    All 7 had valid coordinates. The discrepancy was caused by an OpenStreetMap Overpass
+    query that matched facilities tagged <code>healthcare=rehabilitation</code> too broadly.
+    The correlation figures above use the correct count of 79 verified addiction treatment
+    services and do not need to be revised.
+  </p>
+</section>
+
 <footer>
   <p>Part of the <a href="index.html">Two Decades of Disadvantage</a> project.
   Analysis by Shay McDonnell. Data: Pobal, CSO, OSM.</p>
