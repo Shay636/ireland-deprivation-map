@@ -143,6 +143,40 @@
     line-height: 1.45;
   }
 
+  /* ── Further reading card ── */
+  .further-reading {
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 32px 0 0;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .further-reading:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 10px rgba(0,0,0,.07);
+  }
+  .further-reading .fr-label {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.67rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 5px;
+  }
+  .further-reading .fr-title {
+    font-size: 1rem; font-weight: bold; color: var(--text);
+    margin-bottom: 4px;
+  }
+  .further-reading .fr-desc {
+    font-size: 0.875rem; color: var(--muted);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .further-reading .fr-arrow {
+    float: right; font-size: 1.1rem; color: var(--accent);
+    margin-left: 12px; margin-top: 2px;
+  }
+
   /* ── Limitations list ── */
   .limitations-list {
     list-style: none;
@@ -289,6 +323,12 @@
       crisis. The same pattern applies to Cork City, Limerick City, and Waterford City.
       Where they exist, urban services cover the ground. They do not always cover the need.
     </p>
+    <a class="further-reading" href="correlation.html">
+      <span class="fr-arrow">&#8594;</span>
+      <div class="fr-label">Further analysis</div>
+      <div class="fr-title">Is there a statistical relationship between deprivation and distance to treatment?</div>
+      <div class="fr-desc">Scatter plots and correlation analysis across all Electoral Divisions — national picture and rural Ireland separately, with plain-English interpretation.</div>
+    </a>
   </section>
 
   <section class="body-section">
