@@ -170,8 +170,49 @@ def flag_persistent(merged):
 
 # ── Step 5: Build JSON payload ────────────────────────────────────────────────
 
+def _calc_distances(merged, services):
+    """Return dict {ED_ID_STR: {d, n, c}} — distance km, service name, county."""
+    centroids = merged.geometry.to_crs(epsg=4326).centroid
+    clat = centroids.y.values
+    clon = centroids.x.values
+    slat = services["lat"].values
+    slon = services["lng"].values
+    sname = services["name"].values
+    scounty = services["county"].values
+    R = 6371.0
+
+    result = {}
+    for i, ed_id in enumerate(merged["ED_ID_STR"]):
+        if not (np.isfinite(clat[i]) and np.isfinite(clon[i])):
+            result[ed_id] = None
+            continue
+        lat1 = math.radians(clat[i]); lon1 = math.radians(clon[i])
+        lat2 = np.radians(slat);       lon2 = np.radians(slon)
+        a = np.sin((lat2 - lat1) / 2)**2 + math.cos(lat1) * np.cos(lat2) * np.sin((lon2 - lon1) / 2)**2
+        d = R * 2 * np.arcsin(np.sqrt(a))
+        idx = int(np.argmin(d))
+        result[ed_id] = {
+            "d": round(float(d[idx]), 1),
+            "n": sname[idx],
+            "c": scounty[idx],
+        }
+    return result
+
+
 def build_json_payload(merged, services):
     """Return dicts suitable for embedding in JavaScript."""
+
+    print("  Calculating ED distances to nearest service …")
+    dist_data = _calc_distances(merged, services)
+
+    # Most isolated ED for reporting
+    max_ed = max(
+        ((v["d"], k, v["n"]) for k, v in dist_data.items() if v),
+        key=lambda x: x[0]
+    )
+    row = merged[merged["ED_ID_STR"] == max_ed[1]].iloc[0]
+    print(f"  Most isolated ED: {row['ED_ENGLISH']}, {row['COUNTY_ENGLISH']} "
+          f"— {max_ed[0]:.1f} km from {max_ed[2]}")
 
     # GeoJSON (geometry only + id/name/county)
     feats = []
@@ -179,16 +220,15 @@ def build_json_payload(merged, services):
         if row.geometry is None or row.geometry.is_empty:
             continue
         props = {
-            "id":          row["ED_ID_STR"],
-            "name":        row.get("ED_ENGLISH", ""),
-            "county":      row.get("COUNTY_ENGLISH", ""),
-            "lea":         row.get("CSO_LEA", ""),
-            "persistent":  bool(row["persistently_deprived"]),
-            "pop":         int(row["pop"]) if pd.notna(row.get("pop")) else None,
+            "id":         row["ED_ID_STR"],
+            "name":       row.get("ED_ENGLISH", ""),
+            "county":     row.get("COUNTY_ENGLISH", ""),
+            "lea":        row.get("CSO_LEA", ""),
+            "persistent": bool(row["persistently_deprived"]),
+            "pop":        int(row["pop"]) if pd.notna(row.get("pop")) else None,
         }
-        # Trim coordinate precision to 4 dp to reduce file size
-        geom = row.geometry.__geo_interface__
-        feats.append({"type": "Feature", "properties": props, "geometry": geom})
+        feats.append({"type": "Feature", "properties": props,
+                      "geometry": row.geometry.__geo_interface__})
 
     geojson = {"type": "FeatureCollection", "features": feats}
 
@@ -212,7 +252,7 @@ def build_json_payload(merged, services):
         for _, r in services.iterrows()
     ]
 
-    return geojson, score_dicts, svc_list
+    return geojson, score_dicts, svc_list, dist_data
 
 
 # ── Step 6: Render HTML ───────────────────────────────────────────────────────
@@ -339,6 +379,30 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   #legend hr { margin: 7px 0; border-color: #ddd; }
   #legend .caveat { font-size: 10px; color: #666; margin-top: 6px; }
 
+  /* ── View toggle tabs ── */
+  #view-tabs {
+    display: flex; margin-bottom: 10px;
+    border-radius: 7px; overflow: hidden;
+    border: 1px solid #e0e0e0;
+  }
+  .vtab {
+    flex: 1; padding: 6px 4px; font-size: 10.5px; font-weight: 600;
+    border: none; background: #f5f5f5; cursor: pointer;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #666; letter-spacing: 0.02em; transition: background .15s, color .15s;
+  }
+  .vtab:first-child { border-right: 1px solid #e0e0e0; }
+  .vtab.active { background: #1a1a1a; color: #fff; }
+
+  /* ── Distance legend section ── */
+  #legend-dist { display: none; }
+  #legend-dep  { display: block; }
+
+  /* ── Time control dimmed in distance mode ── */
+  #time-control.dimmed {
+    opacity: 0.38; pointer-events: none;
+  }
+
   /* ── Tooltip override ── */
   .leaflet-tooltip { font-size: 12px; }
 </style>
@@ -369,15 +433,35 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
 <!-- Legend -->
 <div class="panel" id="legend">
-  <h4>Deprivation Score</h4>
-  <div class="legend-row"><span class="swatch" style="background:#67000d"></span>&lt; &minus;20 (Extreme deprivation)</div>
-  <div class="legend-row"><span class="swatch" style="background:#cb181d"></span>&minus;20 to &minus;10</div>
-  <div class="legend-row"><span class="swatch" style="background:#fc8d59"></span>&minus;10 to &minus;5</div>
-  <div class="legend-row"><span class="swatch" style="background:#fee08b"></span>&minus;5 to 0</div>
-  <div class="legend-row"><span class="swatch" style="background:#d9ef8b"></span>0 to 5</div>
-  <div class="legend-row"><span class="swatch" style="background:#66bd63"></span>5 to 15</div>
-  <div class="legend-row"><span class="swatch" style="background:#1a7837"></span>&gt; 15 (Affluent)</div>
-  <div class="legend-row"><span class="swatch" style="background:#cccccc"></span>No data</div>
+  <div id="view-tabs">
+    <button class="vtab active" id="tab-dep"  onclick="setView('dep')">Deprivation</button>
+    <button class="vtab"        id="tab-dist" onclick="setView('dist')">Distance to service</button>
+  </div>
+
+  <!-- Deprivation legend -->
+  <div id="legend-dep">
+    <div class="legend-row"><span class="swatch" style="background:#67000d"></span>&lt; &minus;20 (Extreme)</div>
+    <div class="legend-row"><span class="swatch" style="background:#cb181d"></span>&minus;20 to &minus;10</div>
+    <div class="legend-row"><span class="swatch" style="background:#fc8d59"></span>&minus;10 to &minus;5</div>
+    <div class="legend-row"><span class="swatch" style="background:#fee08b"></span>&minus;5 to 0</div>
+    <div class="legend-row"><span class="swatch" style="background:#d9ef8b"></span>0 to 5</div>
+    <div class="legend-row"><span class="swatch" style="background:#66bd63"></span>5 to 15</div>
+    <div class="legend-row"><span class="swatch" style="background:#1a7837"></span>&gt; 15 (Affluent)</div>
+    <div class="legend-row"><span class="swatch" style="background:#cccccc"></span>No data</div>
+  </div>
+
+  <!-- Distance legend -->
+  <div id="legend-dist">
+    <div class="legend-row"><span class="swatch" style="background:#fff5f0;border-color:#ddd"></span>&lt; 5 km</div>
+    <div class="legend-row"><span class="swatch" style="background:#fee0d2"></span>5 &ndash; 10 km</div>
+    <div class="legend-row"><span class="swatch" style="background:#fcbba1"></span>10 &ndash; 20 km</div>
+    <div class="legend-row"><span class="swatch" style="background:#fc9272"></span>20 &ndash; 30 km</div>
+    <div class="legend-row"><span class="swatch" style="background:#fb6a4a"></span>30 &ndash; 45 km</div>
+    <div class="legend-row"><span class="swatch" style="background:#ef3b2c"></span>45 &ndash; 60 km</div>
+    <div class="legend-row"><span class="swatch" style="background:#67000d"></span>&gt; 60 km (most isolated)</div>
+    <div class="legend-row"><span class="swatch" style="background:#cccccc"></span>No data</div>
+  </div>
+
   <hr>
   <div class="legend-row">
     <span class="persistent-swatch"></span>
@@ -390,10 +474,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <hr>
   <div class="caveat">
     Deprivation: Pobal HP Index, relative weight score.<br>
-    More negative = more deprived.<br>
+    Distance: straight-line to nearest listed service.<br>
     Service locations: Dec 2025 (fixed across all years).<br>
-    <b>Caveat:</b> GP-based medication-assisted treatment
-    (methadone, buprenorphine) is <u>not included</u>.
+    <b>Caveat:</b> GP-based treatment not included.
   </div>
 </div>
 
@@ -403,9 +486,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 // ══════════════════════════════════════════════════════════════════
 // EMBEDDED DATA (injected by Python)
 // ══════════════════════════════════════════════════════════════════
-const GEOJSON  = %%GEOJSON%%;
-const SCORES   = %%SCORES%%;
-const SERVICES = %%SERVICES%%;
+const GEOJSON    = %%GEOJSON%%;
+const SCORES     = %%SCORES%%;
+const SERVICES   = %%SERVICES%%;
+const DISTANCES  = %%DISTANCES%%;
 
 // ══════════════════════════════════════════════════════════════════
 // MAP SETUP
@@ -417,7 +501,7 @@ L.tileLayer(
 ).addTo(map);
 
 // ══════════════════════════════════════════════════════════════════
-// COLOR SCALE  (Pobal-range: −45 → +30)
+// COLOR SCALES
 // ══════════════════════════════════════════════════════════════════
 function getColor(score) {
   if (score === null || score === undefined) return '#cccccc';
@@ -431,51 +515,84 @@ function getColor(score) {
   return '#1a7837';
 }
 
+function getDistColor(dist) {
+  if (dist === null || dist === undefined) return '#cccccc';
+  if (dist <  5)  return '#fff5f0';
+  if (dist < 10)  return '#fee0d2';
+  if (dist < 20)  return '#fcbba1';
+  if (dist < 30)  return '#fc9272';
+  if (dist < 45)  return '#fb6a4a';
+  if (dist < 60)  return '#ef3b2c';
+  return '#67000d';
+}
+
 // ══════════════════════════════════════════════════════════════════
-// YEAR STATE
+// VIEW MODE + YEAR STATE
 // ══════════════════════════════════════════════════════════════════
 const YEARS = [2006, 2011, 2016, 2022];
 let currentIdx = 3;
+let viewMode = 'dep';   // 'dep' | 'dist'
 
 function currentYear() { return YEARS[currentIdx]; }
 
 function styleFeature(feature) {
-  const score = SCORES[currentYear()][feature.properties.id];
+  const id = feature.properties.id;
   const isPersistent = feature.properties.persistent;
+  let fillColor, fillOpacity;
+  if (viewMode === 'dist') {
+    const d = DISTANCES[id];
+    fillColor   = d ? getDistColor(d.d) : '#cccccc';
+    fillOpacity = d ? 0.78 : 0.20;
+  } else {
+    const score = SCORES[currentYear()][id];
+    fillColor   = getColor(score);
+    fillOpacity = score !== null ? 0.72 : 0.20;
+  }
   return {
-    fillColor:   getColor(score),
-    fillOpacity: score !== null ? 0.72 : 0.20,
-    color:       isPersistent ? '#111111' : '#666666',
-    weight:      isPersistent ? 1.2       : 0.15,
-    dashArray:   isPersistent ? null      : null,
+    fillColor,
+    fillOpacity,
+    color:  isPersistent ? '#111111' : '#666666',
+    weight: isPersistent ? 1.2       : 0.15,
   };
 }
 
 function tooltipContent(feature) {
-  const y    = currentYear();
-  const sc   = SCORES[y][feature.properties.id];
-  const p    = feature.properties;
+  const y  = currentYear();
+  const p  = feature.properties;
+  const sc = SCORES[y][p.id];
+  const di = DISTANCES[p.id];
+  const fmt  = v => (v !== null && v !== undefined) ? v.toFixed(1) : '&mdash;';
   const flag = p.persistent
-    ? '<br><b style="color:#c00;">⚠ Persistently deprived — bottom quartile in all four waves</b>'
+    ? '<br><b style="color:#c00;">&#9888; Persistently deprived &mdash; bottom quartile in all four waves</b>'
     : '';
-  const scores2006 = SCORES[2006][p.id];
-  const scores2011 = SCORES[2011][p.id];
-  const scores2016 = SCORES[2016][p.id];
-  const scores2022 = SCORES[2022][p.id];
-  const fmt = v => (v !== null && v !== undefined) ? v.toFixed(1) : '—';
-  return `<b>${p.name}</b><br>
-          County: ${p.county}<br>
-          LEA: ${p.lea}<br>
-          Population (2022): ${p.pop !== null ? p.pop.toLocaleString() : '—'}<br>
-          <hr style="margin:4px 0;">
-          Score <b>${y}</b>: <b>${fmt(sc)}</b><br>
-          <small>
-          2006: ${fmt(scores2006)} &nbsp;
-          2011: ${fmt(scores2011)} &nbsp;
-          2016: ${fmt(scores2016)} &nbsp;
-          2022: ${fmt(scores2022)}
-          </small>
+  const distBlock = di
+    ? `<tr><td style="color:#888;padding-right:8px;">Nearest service</td>
+           <td><b>${di.d} km</b> &mdash; ${di.n}, ${di.c}</td></tr>`
+    : '';
+  return `<b>${p.name}</b><br>County: ${p.county} &nbsp;|&nbsp; LEA: ${p.lea}<br>
+          Population (2022): ${p.pop !== null ? p.pop.toLocaleString() : '&mdash;'}<br>
+          <hr style="margin:5px 0;">
+          <table style="border-collapse:collapse;font-size:11.5px;">
+            <tr><td style="color:#888;padding-right:8px;">Deprivation ${y}</td>
+                <td><b>${fmt(sc)}</b></td></tr>
+            <tr><td style="color:#888;padding-right:8px;font-size:10px;" colspan="2">
+              2006: ${fmt(SCORES[2006][p.id])} &nbsp;
+              2011: ${fmt(SCORES[2011][p.id])} &nbsp;
+              2016: ${fmt(SCORES[2016][p.id])} &nbsp;
+              2022: ${fmt(SCORES[2022][p.id])}</td></tr>
+            ${distBlock}
+          </table>
           ${flag}`;
+}
+
+function setView(mode) {
+  viewMode = mode;
+  document.getElementById('tab-dep').classList.toggle('active',  mode === 'dep');
+  document.getElementById('tab-dist').classList.toggle('active', mode === 'dist');
+  document.getElementById('legend-dep').style.display  = mode === 'dep'  ? 'block' : 'none';
+  document.getElementById('legend-dist').style.display = mode === 'dist' ? 'block' : 'none';
+  document.getElementById('time-control').classList.toggle('dimmed', mode === 'dist');
+  geojsonLayer.setStyle(styleFeature);
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -590,15 +707,13 @@ function togglePlay() {
 """
 
 
-def render_html(geojson, score_dicts, svc_list):
+def render_html(geojson, score_dicts, svc_list, dist_data):
     """Inject data into the HTML template and return the complete page."""
 
-    # Round GeoJSON coordinate precision to save space
     def round_coords(obj, dp=4):
         if isinstance(obj, dict):
             return {k: round_coords(v, dp) for k, v in obj.items()}
         if isinstance(obj, list):
-            # If it looks like a coordinate pair
             if len(obj) == 2 and all(isinstance(x, float) for x in obj):
                 return [round(obj[0], dp), round(obj[1], dp)]
             return [round_coords(x, dp) for x in obj]
@@ -607,9 +722,10 @@ def render_html(geojson, score_dicts, svc_list):
     geojson_rounded = round_coords(geojson)
 
     html = HTML_TEMPLATE
-    html = html.replace("%%GEOJSON%%",  json.dumps(geojson_rounded, separators=(",", ":")))
-    html = html.replace("%%SCORES%%",   json.dumps(score_dicts,     separators=(",", ":")))
-    html = html.replace("%%SERVICES%%", json.dumps(svc_list,        separators=(",", ":")))
+    html = html.replace("%%GEOJSON%%",    json.dumps(geojson_rounded, separators=(",", ":")))
+    html = html.replace("%%SCORES%%",     json.dumps(score_dicts,     separators=(",", ":")))
+    html = html.replace("%%SERVICES%%",   json.dumps(svc_list,        separators=(",", ":")))
+    html = html.replace("%%DISTANCES%%",  json.dumps(dist_data,       separators=(",", ":")))
     return html
 
 
@@ -631,11 +747,11 @@ def main():
     merged      = flag_persistent(merged)
 
     print("[5] Serialising to JSON …")
-    geojson, score_dicts, svc_list = build_json_payload(merged, services)
+    geojson, score_dicts, svc_list, dist_data = build_json_payload(merged, services)
     print(f"    GeoJSON features: {len(geojson['features'])}")
 
     print("[6] Rendering HTML …")
-    html = render_html(geojson, score_dicts, svc_list)
+    html = render_html(geojson, score_dicts, svc_list, dist_data)
     out  = os.path.join(OUTPUTS, "timeslider.html")
     with open(out, "w", encoding="utf-8") as f:
         f.write(html)
