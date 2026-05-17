@@ -262,7 +262,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ireland Deprivation vs Addiction Treatment Access — 2006–2022</title>
+<title>Ireland Deprivation vs Addiction Treatment Access, 2006 to 2022</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
@@ -427,7 +427,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <button id="reset-btn" onclick="setYear(3)">Reset</button>
   </div>
   <div id="tc-note">
-    Service markers fixed to Dec 2025 &mdash; no historical service data available.
+    Service markers fixed to Dec 2025. No historical service data available.
   </div>
 </div>
 
@@ -561,16 +561,16 @@ function tooltipContent(feature) {
   const p  = feature.properties;
   const sc = SCORES[y][p.id];
   const di = DISTANCES[p.id];
-  const fmt  = v => (v !== null && v !== undefined) ? v.toFixed(1) : '&mdash;';
+  const fmt  = v => (v !== null && v !== undefined) ? v.toFixed(1) : 'N/A';
   const flag = p.persistent
-    ? '<br><b style="color:#c00;">&#9888; Persistently deprived &mdash; bottom quartile in all four waves</b>'
+    ? '<br><b style="color:#c00;">&#9888; Persistently deprived: bottom quartile in all four waves</b>'
     : '';
   const distBlock = di
     ? `<tr><td style="color:#888;padding-right:8px;">Nearest service</td>
-           <td><b>${di.d} km</b> &mdash; ${di.n}, ${di.c}</td></tr>`
+           <td><b>${di.d} km</b>, ${di.n}, ${di.c}</td></tr>`
     : '';
   return `<b>${p.name}</b><br>County: ${p.county} &nbsp;|&nbsp; LEA: ${p.lea}<br>
-          Population (2022): ${p.pop !== null ? p.pop.toLocaleString() : '&mdash;'}<br>
+          Population (2022): ${p.pop !== null ? p.pop.toLocaleString() : 'N/A'}<br>
           <hr style="margin:5px 0;">
           <table style="border-collapse:collapse;font-size:11.5px;">
             <tr><td style="color:#888;padding-right:8px;">Deprivation ${y}</td>

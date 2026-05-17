@@ -1,7 +1,7 @@
 """
 Correlation analysis: deprivation score vs distance to nearest treatment service
 ================================================================================
-Produces docs/correlation.html — two scatter plots and a plain-English summary.
+Produces docs/correlation.html: two scatter plots and a plain-English summary.
 """
 
 import os, math, base64, io, warnings
@@ -88,11 +88,11 @@ def make_county_palette(counties):
     """Assign a visually distinct colour to each county."""
     # Organised by province so geographically close counties share hue families
     PROVINCE_PALETTE = {
-        # Connacht — blues
+        # Connacht (blues)
         "GALWAY":        "#1565C0", "GALWAY CITY":   "#5C9BD6",
         "MAYO":          "#2196F3", "ROSCOMMON":     "#64B5F6",
         "SLIGO":         "#0D47A1", "LEITRIM":       "#42A5F5",
-        # Leinster — greens / teals
+        # Leinster (greens/teals)
         "DUBLIN CITY":   "#1B5E20", "SOUTH DUBLIN":  "#2E7D32",
         "FINGAL":        "#388E3C", "DUN LAOGHAIRE/RATHDOWN": "#43A047",
         "WICKLOW":       "#66BB6A", "WEXFORD":       "#A5D6A7",
@@ -101,13 +101,13 @@ def make_county_palette(counties):
         "WESTMEATH":     "#4DB6AC", "LONGFORD":      "#80CBC4",
         "MEATH":         "#558B2F", "LOUTH":         "#8BC34A",
         "KILDARE":       "#33691E",
-        # Munster — oranges / reds
+        # Munster (oranges/reds)
         "CORK":          "#BF360C", "CORK CITY":     "#E64A19",
         "KERRY":         "#E65100", "LIMERICK":      "#FF6D00",
         "LIMERICK CITY": "#FF8F00", "CLARE":         "#FFA000",
         "WATERFORD":     "#FF7043", "WATERFORD CITY":"#FF5722",
         "NORTH TIPPERARY":"#F57C00","SOUTH TIPPERARY":"#EF6C00",
-        # Ulster (ROI) — purples
+        # Ulster ROI (purples)
         "DONEGAL":       "#6A1B9A", "MONAGHAN":      "#8E24AA",
         "CAVAN":         "#AB47BC",
     }
@@ -170,7 +170,7 @@ def make_scatter(df, title, subtitle, fig_label):
                 ha="center", va="bottom", fontsize=9.5, color="#666",
                 style="italic")
 
-    # County legend — two columns outside the plot
+    # County legend: two columns outside the plot
     handles, labels = ax.get_legend_handles_labels()
     # Separate regression line handle from county handles
     reg_h  = [h for h, l in zip(handles, labels) if "Regression" in l]
@@ -228,7 +228,7 @@ def plain_english_summary(r_all, p_all, slope_all, n_all,
                     f"treatment service{context}")
         if r > 0.05:
             return (f"more deprived Electoral Divisions tend to be <b>closer</b> to a "
-                    f"treatment service{context} — a counterintuitive pattern driven by "
+                    f"treatment service{context}, a counterintuitive pattern driven by "
                     f"urban concentration")
         return f"there is <b>no clear directional relationship</b>{context}"
 
@@ -250,7 +250,7 @@ The deprivation score alone explains <b>{100*r2_all:.1f}%</b> of the variation i
     lines.append(f"""
 <p>At the national level this association is partly masked by urban concentration.
 Ireland's most deprived areas include both inner-city Electoral Divisions —
-where services are close — and remote rural areas where they are not.
+where services are close, and remote rural areas where they are not.
 These two patterns partially cancel each other out in the national figure.</p>
 """)
 
@@ -268,11 +268,11 @@ a rural Electoral Division is on average {abs(slope_rur):.2f} km further from th
 
     # Bottom line
     if r_rur < -0.15 and p_rur < 0.05:
-        verdict = ("Yes — in rural Ireland there is a statistically significant association "
+        verdict = ("Yes. In rural Ireland there is a statistically significant association "
                    "between higher deprivation and greater distance from treatment. "
                    "The places that need help most are, on average, the hardest to reach.")
     elif r_rur < 0 and p_rur < 0.05:
-        verdict = ("Weakly yes — the association is statistically significant in rural Ireland "
+        verdict = ("Weakly yes: the association is statistically significant in rural Ireland "
                    "but modest in magnitude. Distance and deprivation co-occur, but the "
                    "relationship is noisy, and many deprived rural areas are not unusually "
                    "far from services.")
@@ -299,7 +299,7 @@ def render_html(img_all, stats_all, img_rur, stats_rur, summary_html):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Correlation: Deprivation vs Distance to Treatment — Ireland</title>
+<title>Correlation: Deprivation vs Distance to Treatment in Ireland</title>
 <style>
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
   :root {{ --text: #1a1a1a; --muted: #555; --border: #ddd; --accent: #c00; }}
@@ -373,13 +373,13 @@ def render_html(img_all, stats_all, img_rur, stats_rur, summary_html):
     </div>
   </div>
   <div class="plot-wrap">
-    <img src="data:image/png;base64,{img_all}" alt="Scatter plot — all EDs">
+    <img src="data:image/png;base64,{img_all}" alt="Scatter plot, all EDs">
   </div>
 </section>
 
 <section class="section">
   <p class="section-label">Rural Electoral Divisions only (n = {n_rur:,})</p>
-  <h2>Rural Ireland — removing the urban masking effect</h2>
+  <h2>Rural Ireland: removing the urban masking effect</h2>
   <div class="stat-row">
     <div class="stat-box">
       <div class="val">r = {r_rur:.3f}</div>
@@ -395,7 +395,7 @@ def render_html(img_all, stats_all, img_rur, stats_rur, summary_html):
     </div>
   </div>
   <div class="plot-wrap">
-    <img src="data:image/png;base64,{img_rur}" alt="Scatter plot — rural EDs">
+    <img src="data:image/png;base64,{img_rur}" alt="Scatter plot, rural EDs">
   </div>
 </section>
 
@@ -450,7 +450,7 @@ def main():
 
     # Rural EDs
     rural = df[df["is_rural"]].copy()
-    print(f"\n[Rural EDs — {len(rural):,} EDs]")
+    print(f"\n[Rural EDs: {len(rural):,} EDs]")
     img_rur, r_rur, p_rur, slope_rur, n_rur = make_scatter(
         rural,
         "Deprivation Score vs Distance to Nearest Treatment Service",
