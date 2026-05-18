@@ -252,7 +252,71 @@ def build_json_payload(merged, services):
         for _, r in services.iterrows()
     ]
 
-    return geojson, score_dicts, svc_list, dist_data
+    # Treatment demand: {ED_ID_STR: cases_per_100k or null}
+    # Map boundary COUNTY_ENGLISH → NDTRS county name → rate per 100k
+    treat_data = _build_treatment_lookup(merged)
+
+    return geojson, score_dicts, svc_list, dist_data, treat_data
+
+
+# County populations (Census 2022) for rate calculation
+_COUNTY_POP = {
+    "Carlow": 61968, "Cavan": 81704, "Clare": 127938, "Cork": 584568,
+    "Donegal": 167084, "Dublin": 1458154, "Galway": 277478, "Kerry": 156458,
+    "Kildare": 247774, "Kilkenny": 104160, "Laois": 91877, "Leitrim": 35199,
+    "Limerick": 209591, "Longford": 46751, "Louth": 139703, "Mayo": 137970,
+    "Meath": 220826, "Monaghan": 65288, "Offaly": 83150, "Roscommon": 70259,
+    "Sligo": 70198, "Tipperary": 167707, "Waterford": 127363,
+    "Westmeath": 96221, "Wexford": 163919, "Wicklow": 155851,
+}
+
+# Map boundary COUNTY_ENGLISH → canonical county name matching NDTRS
+_COUNTY_MAP = {
+    "DUBLIN CITY":            "Dublin",
+    "SOUTH DUBLIN":           "Dublin",
+    "FINGAL":                 "Dublin",
+    "DUN LAOGHAIRE/RATHDOWN": "Dublin",
+    "CORK CITY":              "Cork",
+    "LIMERICK CITY":          "Limerick",
+    "WATERFORD CITY":         "Waterford",
+    "GALWAY CITY":            "Galway",
+    "NORTH TIPPERARY":        "Tipperary",
+    "SOUTH TIPPERARY":        "Tipperary",
+}
+
+
+def _build_treatment_lookup(merged):
+    """Return {ED_ID_STR: cases_per_100k_or_null} from ndtrs_by_county.csv."""
+    ndtrs_path = os.path.join("docs", "ndtrs_by_county.csv")
+    if not os.path.exists(ndtrs_path):
+        print("  WARNING: ndtrs_by_county.csv not found — treatment layer unavailable")
+        return {row["ED_ID_STR"]: None for _, row in merged.iterrows()}
+
+    ndtrs = pd.read_csv(ndtrs_path)
+    # Use most recent available year
+    latest = int(ndtrs["year"].max())
+    recent = ndtrs[ndtrs["year"] == latest].copy()
+    # Exclude non-county rows
+    exclude = {"Outside Ireland", "Address Unknown Ireland",
+               "Items With 5 Or Less Entries Have Been Removed"}
+    recent = recent[~recent["county"].isin(exclude)].copy()
+    recent["county_norm"] = recent["county"].str.strip().str.title()
+
+    # Compute rate per 100k
+    recent["rate"] = recent.apply(
+        lambda r: round(r["cases_all"] / _COUNTY_POP.get(r["county_norm"], 0) * 100_000, 1)
+        if _COUNTY_POP.get(r["county_norm"], 0) > 0 and pd.notna(r["cases_all"]) else None,
+        axis=1
+    )
+    rate_map = dict(zip(recent["county_norm"], recent["rate"]))
+    print(f"  Treatment rates loaded for {len(rate_map)} counties (year {latest})")
+
+    result = {}
+    for _, row in merged.iterrows():
+        ce = str(row.get("COUNTY_ENGLISH", "")).strip().upper()
+        canon = _COUNTY_MAP.get(ce, ce.title())
+        result[row["ED_ID_STR"]] = rate_map.get(canon)
+    return result
 
 
 # ── Step 6: Render HTML ───────────────────────────────────────────────────────
@@ -394,9 +458,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .vtab:first-child { border-right: 1px solid #e0e0e0; }
   .vtab.active { background: #1a1a1a; color: #fff; }
 
-  /* ── Distance legend section ── */
-  #legend-dist { display: none; }
-  #legend-dep  { display: block; }
+  /* ── Legend sections ── */
+  #legend-dist  { display: none; }
+  #legend-treat { display: none; }
+  #legend-dep   { display: block; }
+
+  /* Three-tab layout */
+  .vtab { font-size: 9.5px; }
 
   /* ── Time control dimmed in distance mode ── */
   #time-control.dimmed {
@@ -496,8 +564,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <div class="panel" id="legend">
   <button id="legend-toggle" onclick="toggleLegendCollapse()" title="Toggle legend">&#10005;</button>
   <div id="view-tabs">
-    <button class="vtab active" id="tab-dep"  onclick="setView('dep')">Deprivation</button>
-    <button class="vtab"        id="tab-dist" onclick="setView('dist')">Distance to service</button>
+    <button class="vtab active" id="tab-dep"   onclick="setView('dep')">Deprivation</button>
+    <button class="vtab"        id="tab-dist"  onclick="setView('dist')">Distance</button>
+    <button class="vtab"        id="tab-treat" onclick="setView('treat')">Treatment</button>
   </div>
 
   <!-- Deprivation legend -->
@@ -510,6 +579,17 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <div class="legend-row"><span class="swatch" style="background:#66bd63"></span>5 to 15</div>
     <div class="legend-row"><span class="swatch" style="background:#1a7837"></span>&gt; 15 (Affluent)</div>
     <div class="legend-row"><span class="swatch" style="background:#cccccc"></span>No data</div>
+  </div>
+
+  <!-- Treatment demand legend -->
+  <div id="legend-treat">
+    <div class="legend-row"><span class="swatch" style="background:#f2f0f7;border-color:#ddd"></span>&lt; 150 per 100k</div>
+    <div class="legend-row"><span class="swatch" style="background:#cbc9e2"></span>150 &ndash; 250</div>
+    <div class="legend-row"><span class="swatch" style="background:#9e9ac8"></span>250 &ndash; 350</div>
+    <div class="legend-row"><span class="swatch" style="background:#756bb1"></span>350 &ndash; 450</div>
+    <div class="legend-row"><span class="swatch" style="background:#54278f"></span>450 &ndash; 600</div>
+    <div class="legend-row"><span class="swatch" style="background:#3f007d"></span>&gt; 600 (highest)</div>
+    <div class="legend-row" style="margin-top:4px;font-size:10px;color:#888;">2024 treatment cases per 100k.<br>County-level data — all EDs in a<br>county share the same colour.</div>
   </div>
 
   <!-- Distance legend -->
@@ -552,6 +632,7 @@ const GEOJSON    = %%GEOJSON%%;
 const SCORES     = %%SCORES%%;
 const SERVICES   = %%SERVICES%%;
 const DISTANCES  = %%DISTANCES%%;
+const TREATMENT  = %%TREATMENT%%;
 
 // ══════════════════════════════════════════════════════════════════
 // MAP SETUP
@@ -588,12 +669,22 @@ function getDistColor(dist) {
   return '#67000d';
 }
 
+function getTreatColor(rate) {
+  if (rate === null || rate === undefined) return '#cccccc';
+  if (rate < 150) return '#f2f0f7';
+  if (rate < 250) return '#cbc9e2';
+  if (rate < 350) return '#9e9ac8';
+  if (rate < 450) return '#756bb1';
+  if (rate < 600) return '#54278f';
+  return '#3f007d';
+}
+
 // ══════════════════════════════════════════════════════════════════
 // VIEW MODE + YEAR STATE
 // ══════════════════════════════════════════════════════════════════
 const YEARS = [2006, 2011, 2016, 2022];
 let currentIdx = 3;
-let viewMode = 'dep';   // 'dep' | 'dist'
+let viewMode = 'dep';   // 'dep' | 'dist' | 'treat'
 
 function currentYear() { return YEARS[currentIdx]; }
 
@@ -605,6 +696,10 @@ function styleFeature(feature) {
     const d = DISTANCES[id];
     fillColor   = d ? getDistColor(d.d) : '#cccccc';
     fillOpacity = d ? 0.78 : 0.20;
+  } else if (viewMode === 'treat') {
+    const r = TREATMENT[id];
+    fillColor   = r !== null && r !== undefined ? getTreatColor(r) : '#cccccc';
+    fillOpacity = r !== null && r !== undefined ? 0.78 : 0.20;
   } else {
     const score = SCORES[currentYear()][id];
     fillColor   = getColor(score);
@@ -631,6 +726,11 @@ function tooltipContent(feature) {
     ? `<tr><td style="color:#888;padding-right:8px;">Nearest service</td>
            <td><b>${di.d} km</b>, ${di.n}, ${di.c}</td></tr>`
     : '';
+  const tr = TREATMENT[p.id];
+  const treatBlock = (tr !== null && tr !== undefined)
+    ? `<tr><td style="color:#888;padding-right:8px;">Treatment demand (2024)</td>
+           <td><b>${tr}</b> per 100k <span style="font-size:9px;color:#aaa;">(county)</span></td></tr>`
+    : '';
   return `<b>${p.name}</b><br>County: ${p.county} &nbsp;|&nbsp; LEA: ${p.lea}<br>
           Population (2022): ${p.pop !== null ? p.pop.toLocaleString() : 'N/A'}<br>
           <hr style="margin:5px 0;">
@@ -643,6 +743,7 @@ function tooltipContent(feature) {
               2016: ${fmt(SCORES[2016][p.id])} &nbsp;
               2022: ${fmt(SCORES[2022][p.id])}</td></tr>
             ${distBlock}
+            ${treatBlock}
           </table>
           ${flag}`;
 }
@@ -656,11 +757,13 @@ function toggleLegendCollapse() {
 
 function setView(mode) {
   viewMode = mode;
-  document.getElementById('tab-dep').classList.toggle('active',  mode === 'dep');
-  document.getElementById('tab-dist').classList.toggle('active', mode === 'dist');
-  document.getElementById('legend-dep').style.display  = mode === 'dep'  ? 'block' : 'none';
-  document.getElementById('legend-dist').style.display = mode === 'dist' ? 'block' : 'none';
-  document.getElementById('time-control').classList.toggle('dimmed', mode === 'dist');
+  ['dep','dist','treat'].forEach(function(m) {
+    document.getElementById('tab-' + m).classList.toggle('active', m === mode);
+    var sec = document.getElementById('legend-' + m);
+    if (sec) sec.style.display = (m === mode) ? 'block' : 'none';
+  });
+  // Dim time slider when it has no effect (distance and treatment are year-independent)
+  document.getElementById('time-control').classList.toggle('dimmed', mode !== 'dep');
   geojsonLayer.setStyle(styleFeature);
 }
 
@@ -782,7 +885,7 @@ function togglePlay() {
 """
 
 
-def render_html(geojson, score_dicts, svc_list, dist_data):
+def render_html(geojson, score_dicts, svc_list, dist_data, treat_data):
     """Inject data into the HTML template and return the complete page."""
 
     def round_coords(obj, dp=4):
@@ -801,6 +904,7 @@ def render_html(geojson, score_dicts, svc_list, dist_data):
     html = html.replace("%%SCORES%%",     json.dumps(score_dicts,     separators=(",", ":")))
     html = html.replace("%%SERVICES%%",   json.dumps(svc_list,        separators=(",", ":")))
     html = html.replace("%%DISTANCES%%",  json.dumps(dist_data,       separators=(",", ":")))
+    html = html.replace("%%TREATMENT%%",  json.dumps(treat_data,      separators=(",", ":")))
     return html
 
 
@@ -822,11 +926,11 @@ def main():
     merged      = flag_persistent(merged)
 
     print("[5] Serialising to JSON …")
-    geojson, score_dicts, svc_list, dist_data = build_json_payload(merged, services)
+    geojson, score_dicts, svc_list, dist_data, treat_data = build_json_payload(merged, services)
     print(f"    GeoJSON features: {len(geojson['features'])}")
 
     print("[6] Rendering HTML …")
-    html = render_html(geojson, score_dicts, svc_list, dist_data)
+    html = render_html(geojson, score_dicts, svc_list, dist_data, treat_data)
     out  = os.path.join(OUTPUTS, "timeslider.html")
     with open(out, "w", encoding="utf-8") as f:
         f.write(html)
