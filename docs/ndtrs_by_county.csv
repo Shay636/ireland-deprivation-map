@@ -1,0 +1,610 @@
+county,year,cases_all,cases_opioid
+Address Unknown Ireland,2004,124.0,0.0
+Address Unknown Ireland,2005,86.0,6.0
+Address Unknown Ireland,2006,171.0,17.0
+Address Unknown Ireland,2007,190.0,9.0
+Address Unknown Ireland,2008,87.0,
+Address Unknown Ireland,2009,70.0,12.0
+Address Unknown Ireland,2010,104.0,41.0
+Address Unknown Ireland,2011,39.0,17.0
+Address Unknown Ireland,2012,82.0,30.0
+Address Unknown Ireland,2013,82.0,28.0
+Address Unknown Ireland,2014,106.0,44.0
+Address Unknown Ireland,2015,113.0,40.0
+Address Unknown Ireland,2016,250.0,68.0
+Address Unknown Ireland,2017,104.0,35.0
+Address Unknown Ireland,2018,181.0,137.0
+Address Unknown Ireland,2019,72.0,58.0
+Address Unknown Ireland,2020,59.0,35.0
+Address Unknown Ireland,2021,20.0,16.0
+Address Unknown Ireland,2022,15.0,9.0
+Address Unknown Ireland,2023,38.0,9.0
+Address Unknown Ireland,2024,40.0,9.0
+Carlow,2004,313.0,47.0
+Carlow,2005,262.0,44.0
+Carlow,2006,167.0,47.0
+Carlow,2007,156.0,48.0
+Carlow,2008,193.0,
+Carlow,2009,274.0,82.0
+Carlow,2010,352.0,105.0
+Carlow,2011,380.0,98.0
+Carlow,2012,328.0,79.0
+Carlow,2013,324.0,85.0
+Carlow,2014,261.0,69.0
+Carlow,2015,272.0,87.0
+Carlow,2016,217.0,61.0
+Carlow,2017,239.0,79.0
+Carlow,2018,240.0,76.0
+Carlow,2019,178.0,34.0
+Carlow,2020,177.0,54.0
+Carlow,2021,191.0,40.0
+Carlow,2022,251.0,54.0
+Carlow,2023,251.0,39.0
+Carlow,2024,270.0,39.0
+Cavan,2004,110.0,12.0
+Cavan,2005,97.0,9.0
+Cavan,2006,220.0,17.0
+Cavan,2007,300.0,54.0
+Cavan,2008,244.0,
+Cavan,2009,183.0,49.0
+Cavan,2010,185.0,42.0
+Cavan,2011,165.0,33.0
+Cavan,2012,313.0,51.0
+Cavan,2013,148.0,26.0
+Cavan,2014,117.0,37.0
+Cavan,2015,133.0,15.0
+Cavan,2016,175.0,49.0
+Cavan,2017,165.0,34.0
+Cavan,2018,121.0,16.0
+Cavan,2019,176.0,19.0
+Cavan,2020,118.0,11.0
+Cavan,2021,170.0,28.0
+Cavan,2022,204.0,20.0
+Cavan,2023,310.0,24.0
+Cavan,2024,192.0,19.0
+Clare,2004,138.0,8.0
+Clare,2005,160.0,11.0
+Clare,2006,160.0,25.0
+Clare,2007,201.0,19.0
+Clare,2008,165.0,
+Clare,2009,182.0,34.0
+Clare,2010,214.0,34.0
+Clare,2011,158.0,17.0
+Clare,2012,162.0,31.0
+Clare,2013,242.0,56.0
+Clare,2014,304.0,70.0
+Clare,2015,339.0,88.0
+Clare,2016,305.0,63.0
+Clare,2017,266.0,44.0
+Clare,2018,290.0,61.0
+Clare,2019,302.0,56.0
+Clare,2020,233.0,33.0
+Clare,2021,286.0,50.0
+Clare,2022,309.0,36.0
+Clare,2023,324.0,48.0
+Clare,2024,301.0,29.0
+Cork,2004,1129.0,53.0
+Cork,2005,1345.0,74.0
+Cork,2006,1250.0,102.0
+Cork,2007,1467.0,146.0
+Cork,2008,1574.0,
+Cork,2009,1699.0,254.0
+Cork,2010,2230.0,333.0
+Cork,2011,2418.0,348.0
+Cork,2012,2156.0,280.0
+Cork,2013,2302.0,385.0
+Cork,2014,2346.0,358.0
+Cork,2015,2110.0,380.0
+Cork,2016,1973.0,332.0
+Cork,2017,1765.0,295.0
+Cork,2018,1916.0,354.0
+Cork,2019,1939.0,335.0
+Cork,2020,1532.0,256.0
+Cork,2021,1501.0,229.0
+Cork,2022,1472.0,246.0
+Cork,2023,1459.0,210.0
+Cork,2024,1608.0,193.0
+Donegal,2004,474.0,7.0
+Donegal,2005,392.0,8.0
+Donegal,2006,500.0,18.0
+Donegal,2007,616.0,16.0
+Donegal,2008,651.0,
+Donegal,2009,730.0,29.0
+Donegal,2010,826.0,19.0
+Donegal,2011,735.0,17.0
+Donegal,2012,720.0,29.0
+Donegal,2013,542.0,26.0
+Donegal,2014,503.0,23.0
+Donegal,2015,506.0,25.0
+Donegal,2016,659.0,31.0
+Donegal,2017,699.0,35.0
+Donegal,2018,684.0,31.0
+Donegal,2019,787.0,40.0
+Donegal,2020,669.0,39.0
+Donegal,2021,661.0,37.0
+Donegal,2022,695.0,48.0
+Donegal,2023,765.0,24.0
+Donegal,2024,763.0,30.0
+Dublin,2004,3692.0,2812.0
+Dublin,2005,3993.0,2976.0
+Dublin,2006,4075.0,2959.0
+Dublin,2007,4542.0,2910.0
+Dublin,2008,5327.0,
+Dublin,2009,5431.0,3079.0
+Dublin,2010,5104.0,2633.0
+Dublin,2011,5063.0,2355.0
+Dublin,2012,4566.0,1920.0
+Dublin,2013,5249.0,2293.0
+Dublin,2014,5818.0,2452.0
+Dublin,2015,5907.0,2347.0
+Dublin,2016,5574.0,2205.0
+Dublin,2017,5614.0,2077.0
+Dublin,2018,6643.0,2363.0
+Dublin,2019,6953.0,2341.0
+Dublin,2020,6153.0,1845.0
+Dublin,2021,7518.0,2052.0
+Dublin,2022,8537.0,2306.0
+Dublin,2023,9548.0,2258.0
+Dublin,2024,9473.0,1703.0
+Galway,2004,127.0,21.0
+Galway,2005,166.0,45.0
+Galway,2006,167.0,64.0
+Galway,2007,463.0,124.0
+Galway,2008,658.0,
+Galway,2009,562.0,127.0
+Galway,2010,633.0,181.0
+Galway,2011,605.0,126.0
+Galway,2012,590.0,147.0
+Galway,2013,589.0,160.0
+Galway,2014,479.0,144.0
+Galway,2015,552.0,166.0
+Galway,2016,558.0,157.0
+Galway,2017,492.0,111.0
+Galway,2018,471.0,118.0
+Galway,2019,424.0,81.0
+Galway,2020,291.0,81.0
+Galway,2021,376.0,90.0
+Galway,2022,456.0,78.0
+Galway,2023,552.0,108.0
+Galway,2024,686.0,107.0
+Items With 5 Or Less Entries Have Been Removed,2004,,
+Items With 5 Or Less Entries Have Been Removed,2005,,
+Items With 5 Or Less Entries Have Been Removed,2006,,
+Items With 5 Or Less Entries Have Been Removed,2007,,
+Items With 5 Or Less Entries Have Been Removed,2008,,
+Items With 5 Or Less Entries Have Been Removed,2009,,
+Items With 5 Or Less Entries Have Been Removed,2010,,
+Items With 5 Or Less Entries Have Been Removed,2011,,
+Items With 5 Or Less Entries Have Been Removed,2012,,
+Items With 5 Or Less Entries Have Been Removed,2013,,
+Items With 5 Or Less Entries Have Been Removed,2014,,
+Items With 5 Or Less Entries Have Been Removed,2015,,
+Items With 5 Or Less Entries Have Been Removed,2016,,
+Items With 5 Or Less Entries Have Been Removed,2017,,
+Items With 5 Or Less Entries Have Been Removed,2018,,
+Items With 5 Or Less Entries Have Been Removed,2019,,
+Items With 5 Or Less Entries Have Been Removed,2020,,
+Items With 5 Or Less Entries Have Been Removed,2021,,
+Items With 5 Or Less Entries Have Been Removed,2022,,
+Items With 5 Or Less Entries Have Been Removed,2023,,
+Items With 5 Or Less Entries Have Been Removed,2024,,
+Kerry,2004,270.0,0.0
+Kerry,2005,315.0,11.0
+Kerry,2006,262.0,13.0
+Kerry,2007,311.0,18.0
+Kerry,2008,322.0,
+Kerry,2009,405.0,43.0
+Kerry,2010,705.0,111.0
+Kerry,2011,749.0,90.0
+Kerry,2012,697.0,55.0
+Kerry,2013,678.0,70.0
+Kerry,2014,660.0,72.0
+Kerry,2015,684.0,80.0
+Kerry,2016,644.0,73.0
+Kerry,2017,530.0,65.0
+Kerry,2018,546.0,44.0
+Kerry,2019,567.0,57.0
+Kerry,2020,418.0,54.0
+Kerry,2021,409.0,56.0
+Kerry,2022,475.0,69.0
+Kerry,2023,506.0,75.0
+Kerry,2024,497.0,88.0
+Kildare,2004,361.0,90.0
+Kildare,2005,393.0,73.0
+Kildare,2006,473.0,92.0
+Kildare,2007,425.0,120.0
+Kildare,2008,486.0,
+Kildare,2009,482.0,137.0
+Kildare,2010,571.0,188.0
+Kildare,2011,571.0,182.0
+Kildare,2012,635.0,194.0
+Kildare,2013,561.0,158.0
+Kildare,2014,409.0,103.0
+Kildare,2015,343.0,79.0
+Kildare,2016,304.0,80.0
+Kildare,2017,355.0,87.0
+Kildare,2018,374.0,77.0
+Kildare,2019,402.0,72.0
+Kildare,2020,425.0,85.0
+Kildare,2021,551.0,105.0
+Kildare,2022,653.0,123.0
+Kildare,2023,595.0,99.0
+Kildare,2024,643.0,86.0
+Kilkenny,2004,289.0,13.0
+Kilkenny,2005,310.0,22.0
+Kilkenny,2006,331.0,22.0
+Kilkenny,2007,321.0,39.0
+Kilkenny,2008,335.0,
+Kilkenny,2009,327.0,52.0
+Kilkenny,2010,315.0,81.0
+Kilkenny,2011,338.0,66.0
+Kilkenny,2012,377.0,87.0
+Kilkenny,2013,314.0,86.0
+Kilkenny,2014,336.0,90.0
+Kilkenny,2015,284.0,66.0
+Kilkenny,2016,280.0,59.0
+Kilkenny,2017,260.0,50.0
+Kilkenny,2018,330.0,32.0
+Kilkenny,2019,313.0,57.0
+Kilkenny,2020,215.0,47.0
+Kilkenny,2021,269.0,38.0
+Kilkenny,2022,308.0,47.0
+Kilkenny,2023,330.0,58.0
+Kilkenny,2024,370.0,44.0
+Laois,2004,158.0,49.0
+Laois,2005,118.0,46.0
+Laois,2006,94.0,29.0
+Laois,2007,119.0,33.0
+Laois,2008,124.0,
+Laois,2009,117.0,46.0
+Laois,2010,166.0,64.0
+Laois,2011,247.0,88.0
+Laois,2012,247.0,84.0
+Laois,2013,252.0,103.0
+Laois,2014,295.0,101.0
+Laois,2015,197.0,72.0
+Laois,2016,257.0,90.0
+Laois,2017,338.0,115.0
+Laois,2018,396.0,120.0
+Laois,2019,440.0,157.0
+Laois,2020,284.0,118.0
+Laois,2021,245.0,68.0
+Laois,2022,353.0,95.0
+Laois,2023,282.0,74.0
+Laois,2024,317.0,88.0
+Leitrim,2004,64.0,10.0
+Leitrim,2005,94.0,6.0
+Leitrim,2006,82.0,0.0
+Leitrim,2007,88.0,0.0
+Leitrim,2008,120.0,
+Leitrim,2009,97.0,0.0
+Leitrim,2010,92.0,0.0
+Leitrim,2011,84.0,0.0
+Leitrim,2012,93.0,0.0
+Leitrim,2013,94.0,0.0
+Leitrim,2014,93.0,0.0
+Leitrim,2015,92.0,0.0
+Leitrim,2016,93.0,6.0
+Leitrim,2017,69.0,0.0
+Leitrim,2018,85.0,7.0
+Leitrim,2019,129.0,0.0
+Leitrim,2020,92.0,6.0
+Leitrim,2021,91.0,0.0
+Leitrim,2022,93.0,0.0
+Leitrim,2023,110.0,6.0
+Leitrim,2024,105.0,0.0
+Limerick,2004,390.0,32.0
+Limerick,2005,386.0,36.0
+Limerick,2006,390.0,69.0
+Limerick,2007,649.0,149.0
+Limerick,2008,652.0,
+Limerick,2009,583.0,199.0
+Limerick,2010,680.0,166.0
+Limerick,2011,579.0,107.0
+Limerick,2012,439.0,83.0
+Limerick,2013,590.0,150.0
+Limerick,2014,806.0,246.0
+Limerick,2015,716.0,214.0
+Limerick,2016,760.0,192.0
+Limerick,2017,752.0,180.0
+Limerick,2018,875.0,173.0
+Limerick,2019,932.0,155.0
+Limerick,2020,837.0,192.0
+Limerick,2021,817.0,162.0
+Limerick,2022,856.0,157.0
+Limerick,2023,931.0,144.0
+Limerick,2024,963.0,156.0
+Longford,2004,54.0,0.0
+Longford,2005,79.0,0.0
+Longford,2006,83.0,17.0
+Longford,2007,103.0,20.0
+Longford,2008,129.0,
+Longford,2009,137.0,38.0
+Longford,2010,137.0,38.0
+Longford,2011,181.0,44.0
+Longford,2012,177.0,53.0
+Longford,2013,172.0,49.0
+Longford,2014,230.0,55.0
+Longford,2015,205.0,45.0
+Longford,2016,144.0,32.0
+Longford,2017,100.0,30.0
+Longford,2018,91.0,32.0
+Longford,2019,126.0,40.0
+Longford,2020,138.0,42.0
+Longford,2021,99.0,21.0
+Longford,2022,120.0,23.0
+Longford,2023,118.0,23.0
+Longford,2024,121.0,28.0
+Louth,2004,228.0,63.0
+Louth,2005,278.0,81.0
+Louth,2006,370.0,104.0
+Louth,2007,339.0,85.0
+Louth,2008,333.0,
+Louth,2009,403.0,82.0
+Louth,2010,304.0,100.0
+Louth,2011,354.0,109.0
+Louth,2012,464.0,134.0
+Louth,2013,357.0,105.0
+Louth,2014,379.0,99.0
+Louth,2015,413.0,104.0
+Louth,2016,424.0,100.0
+Louth,2017,425.0,99.0
+Louth,2018,427.0,82.0
+Louth,2019,360.0,42.0
+Louth,2020,333.0,48.0
+Louth,2021,456.0,68.0
+Louth,2022,431.0,50.0
+Louth,2023,557.0,57.0
+Louth,2024,535.0,62.0
+Mayo,2004,39.0,6.0
+Mayo,2005,63.0,0.0
+Mayo,2006,67.0,10.0
+Mayo,2007,167.0,12.0
+Mayo,2008,234.0,
+Mayo,2009,236.0,24.0
+Mayo,2010,188.0,31.0
+Mayo,2011,213.0,21.0
+Mayo,2012,181.0,15.0
+Mayo,2013,176.0,8.0
+Mayo,2014,182.0,9.0
+Mayo,2015,159.0,16.0
+Mayo,2016,163.0,13.0
+Mayo,2017,153.0,16.0
+Mayo,2018,160.0,0.0
+Mayo,2019,158.0,0.0
+Mayo,2020,144.0,9.0
+Mayo,2021,145.0,15.0
+Mayo,2022,183.0,18.0
+Mayo,2023,221.0,9.0
+Mayo,2024,206.0,13.0
+Meath,2004,250.0,56.0
+Meath,2005,287.0,49.0
+Meath,2006,399.0,74.0
+Meath,2007,413.0,83.0
+Meath,2008,450.0,
+Meath,2009,461.0,117.0
+Meath,2010,294.0,108.0
+Meath,2011,254.0,63.0
+Meath,2012,298.0,93.0
+Meath,2013,266.0,79.0
+Meath,2014,294.0,86.0
+Meath,2015,276.0,70.0
+Meath,2016,282.0,62.0
+Meath,2017,336.0,78.0
+Meath,2018,319.0,71.0
+Meath,2019,296.0,40.0
+Meath,2020,268.0,62.0
+Meath,2021,349.0,37.0
+Meath,2022,368.0,47.0
+Meath,2023,431.0,52.0
+Meath,2024,460.0,48.0
+Monaghan,2004,80.0,0.0
+Monaghan,2005,68.0,0.0
+Monaghan,2006,81.0,0.0
+Monaghan,2007,118.0,0.0
+Monaghan,2008,103.0,
+Monaghan,2009,69.0,0.0
+Monaghan,2010,75.0,8.0
+Monaghan,2011,120.0,8.0
+Monaghan,2012,174.0,9.0
+Monaghan,2013,85.0,12.0
+Monaghan,2014,78.0,7.0
+Monaghan,2015,103.0,0.0
+Monaghan,2016,139.0,6.0
+Monaghan,2017,139.0,0.0
+Monaghan,2018,85.0,0.0
+Monaghan,2019,75.0,6.0
+Monaghan,2020,95.0,7.0
+Monaghan,2021,130.0,0.0
+Monaghan,2022,137.0,0.0
+Monaghan,2023,178.0,0.0
+Monaghan,2024,129.0,6.0
+Offaly,2004,203.0,20.0
+Offaly,2005,172.0,24.0
+Offaly,2006,150.0,18.0
+Offaly,2007,167.0,41.0
+Offaly,2008,226.0,
+Offaly,2009,132.0,30.0
+Offaly,2010,163.0,45.0
+Offaly,2011,272.0,58.0
+Offaly,2012,262.0,40.0
+Offaly,2013,253.0,35.0
+Offaly,2014,357.0,83.0
+Offaly,2015,334.0,64.0
+Offaly,2016,214.0,34.0
+Offaly,2017,178.0,19.0
+Offaly,2018,201.0,41.0
+Offaly,2019,181.0,28.0
+Offaly,2020,133.0,36.0
+Offaly,2021,235.0,31.0
+Offaly,2022,197.0,45.0
+Offaly,2023,144.0,24.0
+Offaly,2024,164.0,37.0
+Outside Ireland,2004,26.0,0.0
+Outside Ireland,2005,34.0,0.0
+Outside Ireland,2006,51.0,0.0
+Outside Ireland,2007,67.0,0.0
+Outside Ireland,2008,66.0,
+Outside Ireland,2009,48.0,8.0
+Outside Ireland,2010,49.0,0.0
+Outside Ireland,2011,61.0,0.0
+Outside Ireland,2012,80.0,0.0
+Outside Ireland,2013,54.0,0.0
+Outside Ireland,2014,59.0,0.0
+Outside Ireland,2015,69.0,0.0
+Outside Ireland,2016,72.0,8.0
+Outside Ireland,2017,64.0,9.0
+Outside Ireland,2018,60.0,0.0
+Outside Ireland,2019,34.0,0.0
+Outside Ireland,2020,42.0,0.0
+Outside Ireland,2021,57.0,0.0
+Outside Ireland,2022,67.0,0.0
+Outside Ireland,2023,89.0,0.0
+Outside Ireland,2024,127.0,0.0
+Roscommon,2004,30.0,6.0
+Roscommon,2005,37.0,7.0
+Roscommon,2006,46.0,14.0
+Roscommon,2007,91.0,26.0
+Roscommon,2008,156.0,
+Roscommon,2009,130.0,41.0
+Roscommon,2010,119.0,55.0
+Roscommon,2011,95.0,32.0
+Roscommon,2012,115.0,32.0
+Roscommon,2013,100.0,25.0
+Roscommon,2014,95.0,39.0
+Roscommon,2015,130.0,32.0
+Roscommon,2016,133.0,36.0
+Roscommon,2017,125.0,29.0
+Roscommon,2018,96.0,21.0
+Roscommon,2019,151.0,30.0
+Roscommon,2020,184.0,49.0
+Roscommon,2021,183.0,29.0
+Roscommon,2022,184.0,39.0
+Roscommon,2023,188.0,36.0
+Roscommon,2024,197.0,30.0
+Sligo,2004,237.0,0.0
+Sligo,2005,257.0,6.0
+Sligo,2006,256.0,7.0
+Sligo,2007,287.0,8.0
+Sligo,2008,345.0,
+Sligo,2009,301.0,15.0
+Sligo,2010,307.0,17.0
+Sligo,2011,273.0,14.0
+Sligo,2012,295.0,10.0
+Sligo,2013,260.0,12.0
+Sligo,2014,271.0,18.0
+Sligo,2015,320.0,13.0
+Sligo,2016,247.0,21.0
+Sligo,2017,269.0,13.0
+Sligo,2018,240.0,7.0
+Sligo,2019,314.0,10.0
+Sligo,2020,218.0,22.0
+Sligo,2021,210.0,6.0
+Sligo,2022,252.0,25.0
+Sligo,2023,194.0,20.0
+Sligo,2024,263.0,17.0
+Tipperary,2004,394.0,13.0
+Tipperary,2005,410.0,18.0
+Tipperary,2006,420.0,35.0
+Tipperary,2007,531.0,34.0
+Tipperary,2008,642.0,
+Tipperary,2009,699.0,105.0
+Tipperary,2010,757.0,152.0
+Tipperary,2011,848.0,124.0
+Tipperary,2012,810.0,151.0
+Tipperary,2013,763.0,160.0
+Tipperary,2014,779.0,210.0
+Tipperary,2015,748.0,153.0
+Tipperary,2016,730.0,127.0
+Tipperary,2017,757.0,127.0
+Tipperary,2018,793.0,108.0
+Tipperary,2019,819.0,114.0
+Tipperary,2020,679.0,113.0
+Tipperary,2021,674.0,91.0
+Tipperary,2022,710.0,104.0
+Tipperary,2023,805.0,110.0
+Tipperary,2024,875.0,105.0
+Waterford,2004,421.0,12.0
+Waterford,2005,517.0,42.0
+Waterford,2006,551.0,52.0
+Waterford,2007,479.0,64.0
+Waterford,2008,571.0,
+Waterford,2009,861.0,118.0
+Waterford,2010,905.0,202.0
+Waterford,2011,940.0,190.0
+Waterford,2012,968.0,217.0
+Waterford,2013,926.0,180.0
+Waterford,2014,794.0,160.0
+Waterford,2015,846.0,180.0
+Waterford,2016,781.0,132.0
+Waterford,2017,795.0,140.0
+Waterford,2018,765.0,131.0
+Waterford,2019,718.0,117.0
+Waterford,2020,621.0,109.0
+Waterford,2021,586.0,106.0
+Waterford,2022,622.0,85.0
+Waterford,2023,738.0,109.0
+Waterford,2024,932.0,109.0
+Westmeath,2004,210.0,58.0
+Westmeath,2005,163.0,30.0
+Westmeath,2006,260.0,61.0
+Westmeath,2007,316.0,94.0
+Westmeath,2008,255.0,
+Westmeath,2009,366.0,107.0
+Westmeath,2010,329.0,108.0
+Westmeath,2011,435.0,128.0
+Westmeath,2012,403.0,123.0
+Westmeath,2013,351.0,93.0
+Westmeath,2014,492.0,153.0
+Westmeath,2015,475.0,178.0
+Westmeath,2016,455.0,116.0
+Westmeath,2017,269.0,78.0
+Westmeath,2018,200.0,45.0
+Westmeath,2019,225.0,49.0
+Westmeath,2020,176.0,55.0
+Westmeath,2021,180.0,69.0
+Westmeath,2022,202.0,64.0
+Westmeath,2023,215.0,60.0
+Westmeath,2024,227.0,97.0
+Wexford,2004,404.0,31.0
+Wexford,2005,483.0,43.0
+Wexford,2006,606.0,69.0
+Wexford,2007,647.0,81.0
+Wexford,2008,549.0,
+Wexford,2009,747.0,129.0
+Wexford,2010,740.0,144.0
+Wexford,2011,744.0,115.0
+Wexford,2012,715.0,131.0
+Wexford,2013,735.0,139.0
+Wexford,2014,710.0,115.0
+Wexford,2015,775.0,110.0
+Wexford,2016,738.0,118.0
+Wexford,2017,655.0,94.0
+Wexford,2018,719.0,112.0
+Wexford,2019,699.0,114.0
+Wexford,2020,562.0,85.0
+Wexford,2021,703.0,101.0
+Wexford,2022,678.0,92.0
+Wexford,2023,793.0,84.0
+Wexford,2024,913.0,94.0
+Wicklow,2004,151.0,78.0
+Wicklow,2005,182.0,108.0
+Wicklow,2006,220.0,110.0
+Wicklow,2007,265.0,137.0
+Wicklow,2008,262.0,
+Wicklow,2009,303.0,129.0
+Wicklow,2010,295.0,101.0
+Wicklow,2011,316.0,91.0
+Wicklow,2012,267.0,79.0
+Wicklow,2013,360.0,97.0
+Wicklow,2014,397.0,98.0
+Wicklow,2015,409.0,99.0
+Wicklow,2016,299.0,70.0
+Wicklow,2017,359.0,68.0
+Wicklow,2018,430.0,80.0
+Wicklow,2019,440.0,76.0
+Wicklow,2020,430.0,66.0
+Wicklow,2021,516.0,74.0
+Wicklow,2022,602.0,79.0
+Wicklow,2023,595.0,81.0
+Wicklow,2024,663.0,82.0
